@@ -33,10 +33,11 @@
   .hero4::before {
     background: radial-gradient(ellipse 80% 60% at 60% 40%, #FF9A20 0%, #C05800 60%, #7A2E00 100%);
   }
-  .hero4-h1-mute { color: rgba(26,15,0,0.45); }
-  .hero4-h1-pop  { color: #1A0F00; }
-  .hero4 .lede   { color: rgba(26,15,0,0.7); }
-  .hero4 h1      { color: #1A0F00; }
+  /* Hero text — white on amber */
+  .hero4-h1-mute { color: rgba(255,255,255,0.52); }
+  .hero4-h1-pop  { color: #fff; }
+  .hero4 .lede   { color: rgba(255,255,255,0.82); }
+  .hero4 h1      { color: #fff; }
 
   /* Ticker — amber band */
   .tickerbar { background: #1A0F00; color: #E07B00; }
@@ -50,10 +51,10 @@
   .nav .btn { background: #1A0F00; color: #E07B00; border-radius: 8px; }
   .nav .btn:hover { background: #3D1F00; color: #FFB347; }
 
-  /* Booker tabs on amber */
-  .booker-tab { background: rgba(26,15,0,0.18); color: rgba(26,15,0,0.75); }
-  .booker-tab:hover { background: rgba(26,15,0,0.30); color: #1A0F00; }
-  .booker-tab.is-active { background: var(--paper); color: #1A0F00; }
+  /* Booker tabs — white text unselected, pure white card when active */
+  .booker-tab { background: rgba(0,0,0,0.18); color: rgba(255,255,255,0.75); }
+  .booker-tab:hover { background: rgba(0,0,0,0.30); color: #fff; }
+  .booker-tab.is-active { background: #fff; color: #E07B00; font-weight: 700; }
   .booker-tab.is-active::before { background: #E07B00; }
 
   /* Booker go button */
