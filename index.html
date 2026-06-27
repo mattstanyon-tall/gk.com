@@ -1173,6 +1173,18 @@
     // Click outside to close
     document.addEventListener('click', () => closeAll());
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeAll(); });
+
+    // Pin fields → scroll to main booker and open corresponding dropdown
+    pinFields.forEach(pin => {
+      pin.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const field = document.querySelector(`.booker-field[data-field="${pin.dataset.pin}"]`);
+        if (!field) return;
+        const anchor = document.querySelector('[data-booker-anchor]');
+        anchor.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        setTimeout(() => { closeAll(); field.classList.add('is-open'); }, 350);
+      });
+    });
   })();
 
   // Build-your-route configurator
