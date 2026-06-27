@@ -831,6 +831,7 @@ html, body {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   border-right: 1px solid rgba(255,255,255,0.2);
+  min-height: 420px;
 }
 .step-course { cursor: default; }
 .step {
