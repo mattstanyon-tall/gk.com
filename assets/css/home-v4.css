@@ -906,6 +906,53 @@ html, body {
 .step.is-empty .step-pick { color: rgba(255,255,255,0.4); }
 .step.is-empty .step-pick .amt { color: rgba(255,255,255,0.4); }
 
+/* ---------- Track selector ---------- */
+.route-track-bar {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 13px 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+}
+.route-track-label {
+  font-family: var(--font-num);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.4);
+  flex-shrink: 0;
+}
+.route-track-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.track-chip {
+  padding: 4px 13px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.18);
+  background: transparent;
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  font-family: var(--font-disp);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+.track-chip:hover {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border-color: rgba(255,255,255,0.35);
+}
+.track-chip.is-active {
+  background: var(--cobalt);
+  border-color: var(--cobalt);
+  color: #fff;
+  font-weight: 600;
+}
+
 .route-summary {
   padding: 32px 28px 32px;
   display: flex;

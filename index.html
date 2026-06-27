@@ -12,8 +12,8 @@
 
 <link rel="stylesheet" href="assets/css/tokens.css" />
 <link rel="stylesheet" href="assets/css/base.css" />
-<link rel="stylesheet" href="assets/css/components.css" />
-<link rel="stylesheet" href="assets/css/home-v4.css" />
+<link rel="stylesheet" href="assets/css/components.css?v=2" />
+<link rel="stylesheet" href="assets/css/home-v4.css?v=2" />
 <style>
   :root {
     --cobalt:     #E07B00;
@@ -705,6 +705,16 @@
     </header>
 
     <div class="route-grid">
+      <div class="route-track-bar">
+        <span class="route-track-label">Track</span>
+        <div class="route-track-chips">
+          <button class="track-chip is-active" data-track="cissp" type="button">CISSP</button>
+          <button class="track-chip" data-track="az104" type="button">Azure Administrator</button>
+          <button class="track-chip" data-track="security_plus" type="button">CompTIA Security+</button>
+          <button class="track-chip" data-track="aws_saa" type="button">AWS Solutions Architect</button>
+          <button class="track-chip" data-track="prince2" type="button">PRINCE2 F&amp;P</button>
+        </div>
+      </div>
       <div class="route-steps">
         <button class="step is-on" data-step="course" type="button">
           <div class="step-no"><span>STEP 01</span><span class="step-state">Selected</span></div>
@@ -1140,63 +1150,122 @@
 
   // Build-your-route configurator
   (function(){
-    const PRICES = { course: 3495, voucher: 625, retake: 180, labs: 245 };
-    const NAMES = {
-      course: 'CISSP Boot Camp · 5 days',
-      voucher: '(ISC)² CISSP Exam Voucher',
-      retake: 'Retake Protection',
-      labs: '90-day Practice Labs'
+    const TRACKS = {
+      cissp: {
+        steps: {
+          course:  { desc: 'The class itself — confirmed dates, named instructor, authorised content.', pick: 'CISSP Boot Camp', amt: 3495, line: 'CISSP Boot Camp · 5 days' },
+          voucher: { desc: 'Official certification exam, scheduled when you\'re ready.', pick: '(ISC)² CISSP', amt: 625, line: '(ISC)² CISSP Exam Voucher' },
+          retake:  { desc: 'Free second sitting if you don\'t pass first time. Most learners don\'t need it.', pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
+          labs:    { desc: '90 days of hands-on labs and a domain-specific practice exam bank.', pick: '+ Add labs', amt: 245, line: '90-day Practice Labs' }
+        }
+      },
+      az104: {
+        steps: {
+          course:  { desc: 'Azure Administrator — hands-on, lab-intensive, Microsoft Official Curriculum.', pick: 'AZ-104 Boot Camp', amt: 2295, line: 'AZ-104 Boot Camp · 4 days' },
+          voucher: { desc: 'Microsoft Certified: Azure Administrator Associate exam voucher.', pick: 'Microsoft AZ-104', amt: 165, line: 'Microsoft AZ-104 Exam Voucher' },
+          retake:  { desc: 'Free second attempt. Valid 90 days from exam date.', pick: '+ Add protection', amt: 150, line: 'Retake Protection' },
+          labs:    { desc: 'Azure sandbox environment: 60 days of guided lab exercises.', pick: '+ Add labs', amt: 195, line: '60-day Azure Lab Access' }
+        }
+      },
+      security_plus: {
+        steps: {
+          course:  { desc: 'CompTIA authorised curriculum. Covers threat analysis, cryptography, and risk management.', pick: 'Security+ SY0-701', amt: 1695, line: 'Security+ SY0-701 · 5 days' },
+          voucher: { desc: 'CompTIA Security+ SY0-701 exam voucher. Online or test-centre delivery.', pick: 'CompTIA Security+', amt: 339, line: 'CompTIA Security+ Voucher' },
+          retake:  { desc: 'Free second sitting if you don\'t pass first time.', pick: '+ Add protection', amt: 120, line: 'Retake Protection' },
+          labs:    { desc: '90-day lab access with scenario walkthroughs and practice tests.', pick: '+ Add labs', amt: 145, line: '90-day Practice Labs' }
+        }
+      },
+      aws_saa: {
+        steps: {
+          course:  { desc: 'AWS Solutions Architect – Associate. Authorised APN partner delivery.', pick: 'AWS SAA-C03 Boot Camp', amt: 2195, line: 'AWS SAA-C03 Boot Camp · 3 days' },
+          voucher: { desc: 'Official AWS exam voucher. Valid 2 years from purchase.', pick: 'AWS SAA-C03', amt: 300, line: 'AWS SAA-C03 Exam Voucher' },
+          retake:  { desc: 'One free resit if you don\'t pass first time.', pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
+          labs:    { desc: 'AWS sandbox: 90 days of guided lab scenarios across core services.', pick: '+ Add labs', amt: 225, line: '90-day AWS Lab Access' }
+        }
+      },
+      prince2: {
+        steps: {
+          course:  { desc: 'PeopleCert authorised combined Foundation and Practitioner. Both official manuals included.', pick: 'PRINCE2 F&P · 5 days', amt: 1895, line: 'PRINCE2 Foundation & Practitioner · 5 days' },
+          voucher: { desc: 'Foundation on day 3, Practitioner on day 5. Two PeopleCert vouchers.', pick: 'Foundation + Practitioner', amt: 450, line: 'PRINCE2 F+P Exam Vouchers' },
+          retake:  { desc: 'Free resit vouchers for both exams, if needed.', pick: '+ Add protection', amt: 120, line: 'Retake Protection (both exams)' },
+          labs:    { desc: 'PRINCE2 practice question bank and scenario workbooks.', pick: '+ Add materials', amt: 85, line: 'Practice Materials' }
+        }
+      }
     };
-    const state = { course: true, voucher: true, retake: false, labs: false };
+
+    let currentTrack = 'cissp';
+    let state = { course: true, voucher: true, retake: false, labs: false };
+    let PRICES = {};
 
     function fmt(n) { return '£' + n.toLocaleString('en-GB'); }
+
     function recompute() {
       let total = 0;
-      Object.keys(state).forEach(k => {
-        if (state[k]) total += PRICES[k];
-      });
+      Object.keys(state).forEach(k => { if (state[k]) total += PRICES[k]; });
       document.querySelector('[data-route-total]').textContent = fmt(total);
 
       Object.keys(state).forEach(k => {
         const step = document.querySelector(`.step[data-step="${k}"]`);
         const line = document.querySelector(`.route-line[data-line="${k}"]`);
         if (!step || !line) return;
+        const pick = step.querySelector('.step-pick span:first-child');
         if (state[k]) {
           step.classList.add('is-on'); step.classList.remove('is-empty');
           step.querySelector('.step-state').textContent = (k === 'course' || k === 'voucher') ? 'Selected' : 'Added';
           line.classList.remove('is-pending');
           line.querySelector('.amt').textContent = fmt(PRICES[k]);
-          const pick = step.querySelector('.step-pick span:first-child');
-          if (k === 'retake') pick.textContent = '✓ Protected';
-          if (k === 'labs') pick.textContent = '✓ Labs added';
+          const stepAmt = step.querySelector('.step-pick .amt');
+          if (stepAmt) stepAmt.textContent = fmt(PRICES[k]);
+          if (k === 'retake') pick.textContent = '\u2713 Protected';
+          if (k === 'labs') pick.textContent = currentTrack === 'prince2' ? '\u2713 Materials added' : '\u2713 Labs added';
         } else {
           step.classList.remove('is-on'); step.classList.add('is-empty');
           step.querySelector('.step-state').textContent = 'Optional';
           line.classList.add('is-pending');
-          line.querySelector('.amt').textContent = '— —';
-          const pick = step.querySelector('.step-pick span:first-child');
-          if (k === 'retake') pick.textContent = '+ Add protection';
-          if (k === 'labs') pick.textContent = '+ Add labs';
+          line.querySelector('.amt').textContent = '\u2014 \u2014';
+          if (k === 'retake' || k === 'labs') pick.textContent = TRACKS[currentTrack].steps[k].pick;
         }
       });
 
-      // Sync the route-go price too
       const go = document.querySelector('.route-go');
-      if (go) {
-        go.setAttribute('data-price', fmt(total));
-        go.setAttribute('data-price-value', String(total));
-      }
+      if (go) { go.setAttribute('data-price', fmt(total)); go.setAttribute('data-price-value', String(total)); }
+    }
+
+    function loadTrack(id) {
+      if (!TRACKS[id]) return;
+      currentTrack = id;
+      state = { course: true, voucher: true, retake: false, labs: false };
+      PRICES = {};
+      const track = TRACKS[id];
+      ['course', 'voucher', 'retake', 'labs'].forEach(k => {
+        const d = track.steps[k];
+        PRICES[k] = d.amt;
+        const step = document.querySelector(`.step[data-step="${k}"]`);
+        if (step) {
+          step.querySelector('.step-desc').textContent = d.desc;
+          step.querySelector('.step-pick span:first-child').textContent = d.pick;
+        }
+        const line = document.querySelector(`.route-line[data-line="${k}"]`);
+        if (line) line.querySelector('.name').textContent = d.line;
+      });
+      document.querySelectorAll('.track-chip').forEach(c => c.classList.toggle('is-active', c.dataset.track === id));
+      recompute();
     }
 
     document.querySelectorAll('.step').forEach(step => {
       step.addEventListener('click', () => {
         const k = step.dataset.step;
-        if (k === 'course') return; // always selected in POC
+        if (k === 'course') return;
         state[k] = !state[k];
         recompute();
       });
     });
-    recompute();
+
+    document.querySelectorAll('.track-chip').forEach(chip => {
+      chip.addEventListener('click', () => loadTrack(chip.dataset.track));
+    });
+
+    loadTrack('cissp');
   })();
 
   // Pinned booker on scroll
