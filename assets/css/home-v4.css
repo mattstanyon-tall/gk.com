@@ -227,9 +227,7 @@ html, body {
 
 .booker-body {
   display: grid;
-  grid-template-columns: 1.4fr 1.4fr 1.4fr 1fr auto;
-  gap: 0;
-  border-radius: 0 8px 8px 8px;
+  grid-template-columns: 1.4fr 1.4fr 1.4fr 1fr 220px;
   /* overflow visible so dropdown popovers can escape;
      corner clipping handled per-cell below */
 }
@@ -238,7 +236,7 @@ html, body {
 .booker-body[hidden] { display: none; }
 .booker-body-prog {
   /* 3-field consult variant — same column template as 4-field panels to prevent jump */
-  grid-template-columns: 1.4fr 1.4fr 1.4fr 1fr auto;
+  grid-template-columns: 1.4fr 1.4fr 1.4fr 1fr 240px;
 }
 .booker-body-prog .booker-field:nth-child(3) {
   grid-column: span 2;
@@ -437,8 +435,8 @@ html, body {
   color: #fff;
   border: 0;
   border-radius: 0 8px 8px 0;
-  padding: 0 28px;
-  min-width: 160px;
+  padding: 0 24px;
+  width: 100%;
   font-family: var(--font-disp);
   font-weight: 700;
   font-size: 1rem;
@@ -448,6 +446,7 @@ html, body {
   display: flex;
   align-items: center;
   gap: 14px;
+  white-space: nowrap;
   transition: background var(--dur-2);
 }
 .booker-go:hover { background: var(--cobalt-700); }
