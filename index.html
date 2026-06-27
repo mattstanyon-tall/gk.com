@@ -719,32 +719,38 @@
       </a>
     </header>
 
-    <div class="route-grid">
-      <div class="route-track-bar">
-        <span class="route-track-label">Track</span>
-        <div class="route-track-chips">
-          <button class="track-chip is-active" data-track="cissp" type="button">CISSP</button>
-          <button class="track-chip" data-track="az104" type="button">Azure Administrator</button>
-          <button class="track-chip" data-track="security_plus" type="button">CompTIA Security+</button>
-          <button class="track-chip" data-track="aws_saa" type="button">AWS Solutions Architect</button>
-          <button class="track-chip" data-track="prince2" type="button">PRINCE2 F&amp;P</button>
-        </div>
+    <div class="route-track-bar">
+      <span class="route-track-label">I want to become</span>
+      <div class="route-track-chips">
+        <button class="track-chip is-active" data-track="cissp" type="button">CISSP certified</button>
+        <button class="track-chip" data-track="az104" type="button">Azure Administrator</button>
+        <button class="track-chip" data-track="security_plus" type="button">CompTIA Security+</button>
+        <button class="track-chip" data-track="aws_saa" type="button">AWS Solutions Architect</button>
+        <button class="track-chip" data-track="prince2" type="button">PRINCE2 qualified</button>
       </div>
+    </div>
+
+    <div class="route-grid">
       <div class="route-steps">
-        <button class="step is-on" data-step="course" type="button">
+        <div class="step is-on step-course" data-step="course">
           <div class="step-no"><span>STEP 01</span><span class="step-state">Selected</span></div>
           <h3 class="step-name">Course</h3>
-          <p class="step-desc">The class itself — confirmed dates, named instructor, authorised content.</p>
+          <p class="step-desc">Authorised CISSP content. Named instructor. Confirmed dates guaranteed to run.</p>
+          <div class="step-formats" data-step-formats>
+            <button class="fmt-chip is-active" data-fmt="0" type="button">Classroom · 5 days</button>
+            <button class="fmt-chip" data-fmt="1" type="button">Virtual · live</button>
+            <button class="fmt-chip" data-fmt="2" type="button">Modular · 10 eves</button>
+          </div>
           <div class="step-pick">
             <span>CISSP Boot Camp</span>
             <span class="amt">£3,495</span>
           </div>
-        </button>
+        </div>
 
         <button class="step is-on" data-step="voucher" type="button">
-          <div class="step-no"><span>STEP 02</span><span class="step-state">Added</span></div>
+          <div class="step-no"><span>STEP 02</span><span class="step-state">Included</span></div>
           <h3 class="step-name">Exam Voucher</h3>
-          <p class="step-desc">Official certification exam, scheduled when you're ready.</p>
+          <p class="step-desc">Official certification exam. Scheduled when you're ready — up to 12 months after the class.</p>
           <div class="step-pick">
             <span>(ISC)² CISSP</span>
             <span class="amt">£625</span>
@@ -752,9 +758,10 @@
         </button>
 
         <button class="step" data-step="retake" type="button">
-          <div class="step-no"><span>STEP 03</span><span class="step-state">Optional</span></div>
+          <div class="step-no"><span>STEP 03</span><span class="step-state">Add to guarantee</span></div>
           <h3 class="step-name">Retake Protection</h3>
-          <p class="step-desc">Free second sitting if you don't pass first time. Most learners don't need it.</p>
+          <p class="step-desc">Free second sitting if you don't pass first time.</p>
+          <p class="step-stat" data-step-stat>1 in 3 CISSP candidates need a resit.</p>
           <div class="step-pick">
             <span>+ Add protection</span>
             <span class="amt">£180</span>
@@ -762,9 +769,10 @@
         </button>
 
         <button class="step is-empty" data-step="labs" type="button">
-          <div class="step-no"><span>STEP 04</span><span class="step-state">Optional</span></div>
+          <div class="step-no"><span>STEP 04</span><span class="step-state">Recommended</span></div>
           <h3 class="step-name">Practice Labs</h3>
-          <p class="step-desc">90 days of hands-on labs and a domain-specific practice exam bank.</p>
+          <p class="step-desc">Hands-on lab environment and domain-specific practice exam bank.</p>
+          <p class="step-stat" data-step-labs-stat>Learners with lab access score 18% higher on first attempt.</p>
           <div class="step-pick">
             <span>+ Add labs</span>
             <span class="amt">£245</span>
@@ -774,6 +782,10 @@
 
       <aside class="route-summary">
         <h3>Your route</h3>
+        <div class="route-guarantee" data-route-guarantee hidden>
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.5 4.5H12L8.25 7.3l1.5 4.5L6 9l-3.75 2.8 1.5-4.5L0 4.5h4.5z"/></svg>
+          Guaranteed route
+        </div>
         <div class="route-lines" data-route-lines>
           <div class="route-line" data-line="course"><span class="name">CISSP Boot Camp · 5 days</span><span class="amt">£3,495</span></div>
           <div class="route-line" data-line="voucher"><span class="name">(ISC)² CISSP Exam Voucher</span><span class="amt">£625</span></div>
@@ -789,7 +801,7 @@
           data-title="CISSP Route — class + voucher"
           data-date="06 – 10 Jul 2026" data-modality="Hybrid" data-location="London"
           data-price="£4,120" data-price-value="4120" data-color="#0030FF">
-          Add route to cart
+          <span data-go-label>Add route to cart</span>
           <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </button>
         <p class="route-fineprint">Components ship together. Voucher valid 12 months. Cancel any add-on free up to 7 days before the class.</p>
@@ -1167,52 +1179,88 @@
   (function(){
     const TRACKS = {
       cissp: {
+        formats: ['Classroom · 5 days', 'Virtual · live', 'Modular · 10 eves'],
+        fmtAmts: [3495, 3195, 2995],
+        retakeStat: '1 in 3 CISSP candidates need a resit.',
+        labsStat: 'Learners with lab access score 18% higher on first attempt.',
         steps: {
-          course:  { desc: 'The class itself — confirmed dates, named instructor, authorised content.', pick: 'CISSP Boot Camp', amt: 3495, line: 'CISSP Boot Camp · 5 days' },
-          voucher: { desc: 'Official certification exam, scheduled when you\'re ready.', pick: '(ISC)² CISSP', amt: 625, line: '(ISC)² CISSP Exam Voucher' },
-          retake:  { desc: 'Free second sitting if you don\'t pass first time. Most learners don\'t need it.', pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
-          labs:    { desc: '90 days of hands-on labs and a domain-specific practice exam bank.', pick: '+ Add labs', amt: 245, line: '90-day Practice Labs' }
+          course:  { desc: 'Authorised CISSP content. Named instructor. Confirmed dates guaranteed to run.', pick: 'CISSP Boot Camp', line: 'CISSP Boot Camp · 5 days' },
+          voucher: { desc: 'Official (ISC)² exam voucher. Schedule when you\'re ready — up to 12 months after the class.', pick: '(ISC)² CISSP', amt: 625, line: '(ISC)² CISSP Exam Voucher' },
+          retake:  { pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
+          labs:    { pick: '+ Add labs', amt: 245, line: '90-day Practice Labs' }
         }
       },
       az104: {
+        formats: ['Classroom · 4 days', 'Virtual · live', 'On-demand'],
+        fmtAmts: [2295, 1995, 1695],
+        retakeStat: 'Around 1 in 4 AZ-104 candidates retake.',
+        labsStat: 'Azure sandbox access triples hands-on practice time.',
         steps: {
-          course:  { desc: 'Azure Administrator — hands-on, lab-intensive, Microsoft Official Curriculum.', pick: 'AZ-104 Boot Camp', amt: 2295, line: 'AZ-104 Boot Camp · 4 days' },
+          course:  { desc: 'Microsoft Official Curriculum. Lab-intensive. Authorised Microsoft Learning Partner.', pick: 'AZ-104 Boot Camp', line: 'AZ-104 Boot Camp · 4 days' },
           voucher: { desc: 'Microsoft Certified: Azure Administrator Associate exam voucher.', pick: 'Microsoft AZ-104', amt: 165, line: 'Microsoft AZ-104 Exam Voucher' },
-          retake:  { desc: 'Free second attempt. Valid 90 days from exam date.', pick: '+ Add protection', amt: 150, line: 'Retake Protection' },
-          labs:    { desc: 'Azure sandbox environment: 60 days of guided lab exercises.', pick: '+ Add labs', amt: 195, line: '60-day Azure Lab Access' }
+          retake:  { pick: '+ Add protection', amt: 150, line: 'Retake Protection' },
+          labs:    { pick: '+ Add labs', amt: 195, line: '60-day Azure Lab Access' }
         }
       },
       security_plus: {
+        formats: ['Classroom · 5 days', 'Virtual · live', 'Modular · 8 eves'],
+        fmtAmts: [1695, 1495, 1295],
+        retakeStat: 'Pass rate rises to 94% with a free resit included.',
+        labsStat: 'Practice exam bank reduces revision time by a third.',
         steps: {
-          course:  { desc: 'CompTIA authorised curriculum. Covers threat analysis, cryptography, and risk management.', pick: 'Security+ SY0-701', amt: 1695, line: 'Security+ SY0-701 · 5 days' },
-          voucher: { desc: 'CompTIA Security+ SY0-701 exam voucher. Online or test-centre delivery.', pick: 'CompTIA Security+', amt: 339, line: 'CompTIA Security+ Voucher' },
-          retake:  { desc: 'Free second sitting if you don\'t pass first time.', pick: '+ Add protection', amt: 120, line: 'Retake Protection' },
-          labs:    { desc: '90-day lab access with scenario walkthroughs and practice tests.', pick: '+ Add labs', amt: 145, line: '90-day Practice Labs' }
+          course:  { desc: 'CompTIA authorised. Covers threat analysis, cryptography, and risk management.', pick: 'Security+ SY0-701', line: 'Security+ SY0-701 · 5 days' },
+          voucher: { desc: 'CompTIA Security+ SY0-701 exam voucher. Online or test-centre.', pick: 'CompTIA Security+', amt: 339, line: 'CompTIA Security+ Voucher' },
+          retake:  { pick: '+ Add protection', amt: 120, line: 'Retake Protection' },
+          labs:    { pick: '+ Add labs', amt: 145, line: '90-day Practice Labs' }
         }
       },
       aws_saa: {
+        formats: ['Classroom · 3 days', 'Virtual · live', 'On-demand'],
+        fmtAmts: [2195, 1895, 1595],
+        retakeStat: '1 in 4 AWS SAA candidates sit the exam twice.',
+        labsStat: 'AWS sandbox access improves scenario confidence significantly.',
         steps: {
-          course:  { desc: 'AWS Solutions Architect – Associate. Authorised APN partner delivery.', pick: 'AWS SAA-C03 Boot Camp', amt: 2195, line: 'AWS SAA-C03 Boot Camp · 3 days' },
+          course:  { desc: 'AWS Solutions Architect – Associate. Authorised APN partner delivery.', pick: 'AWS SAA-C03 Boot Camp', line: 'AWS SAA-C03 Boot Camp · 3 days' },
           voucher: { desc: 'Official AWS exam voucher. Valid 2 years from purchase.', pick: 'AWS SAA-C03', amt: 300, line: 'AWS SAA-C03 Exam Voucher' },
-          retake:  { desc: 'One free resit if you don\'t pass first time.', pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
-          labs:    { desc: 'AWS sandbox: 90 days of guided lab scenarios across core services.', pick: '+ Add labs', amt: 225, line: '90-day AWS Lab Access' }
+          retake:  { pick: '+ Add protection', amt: 180, line: 'Retake Protection' },
+          labs:    { pick: '+ Add labs', amt: 225, line: '90-day AWS Lab Access' }
         }
       },
       prince2: {
+        formats: ['Classroom · 5 days', 'Virtual · live', 'Blended'],
+        fmtAmts: [1895, 1595, 1395],
+        retakeStat: 'Practitioner resit rate drops to under 5% with protection included.',
+        labsStat: 'Scenario workbooks cut exam revision time in half.',
         steps: {
-          course:  { desc: 'PeopleCert authorised combined Foundation and Practitioner. Both official manuals included.', pick: 'PRINCE2 F&P · 5 days', amt: 1895, line: 'PRINCE2 Foundation & Practitioner · 5 days' },
-          voucher: { desc: 'Foundation on day 3, Practitioner on day 5. Two PeopleCert vouchers.', pick: 'Foundation + Practitioner', amt: 450, line: 'PRINCE2 F+P Exam Vouchers' },
-          retake:  { desc: 'Free resit vouchers for both exams, if needed.', pick: '+ Add protection', amt: 120, line: 'Retake Protection (both exams)' },
-          labs:    { desc: 'PRINCE2 practice question bank and scenario workbooks.', pick: '+ Add materials', amt: 85, line: 'Practice Materials' }
+          course:  { desc: 'PeopleCert authorised. Combined Foundation & Practitioner. Both official manuals included.', pick: 'PRINCE2 F&P', line: 'PRINCE2 Foundation & Practitioner · 5 days' },
+          voucher: { desc: 'Two PeopleCert vouchers: Foundation on day 3, Practitioner on day 5.', pick: 'F & P Vouchers', amt: 450, line: 'PRINCE2 F+P Exam Vouchers' },
+          retake:  { pick: '+ Add protection', amt: 120, line: 'Retake Protection (both exams)' },
+          labs:    { pick: '+ Add materials', amt: 85, line: 'Practice Materials' }
         }
       }
     };
 
     let currentTrack = 'cissp';
+    let currentFmt = 0;
     let state = { course: true, voucher: true, retake: false, labs: false };
     let PRICES = {};
 
     function fmt(n) { return '£' + n.toLocaleString('en-GB'); }
+
+    function updateGuaranteedState() {
+      const guaranteed = state.retake;
+      const full = state.retake && state.labs;
+      const badge = document.querySelector('[data-route-guarantee]');
+      const goLabel = document.querySelector('[data-go-label]');
+      const summary = document.querySelector('.route-summary');
+      if (badge) badge.hidden = !guaranteed;
+      if (goLabel) {
+        if (full) goLabel.textContent = 'Add full route to cart';
+        else if (guaranteed) goLabel.textContent = 'Add guaranteed route to cart';
+        else goLabel.textContent = 'Add route to cart';
+      }
+      if (summary) summary.classList.toggle('is-guaranteed', guaranteed);
+    }
 
     function recompute() {
       let total = 0;
@@ -1220,22 +1268,22 @@
       document.querySelector('[data-route-total]').textContent = fmt(total);
 
       Object.keys(state).forEach(k => {
-        const step = document.querySelector(`.step[data-step="${k}"]`);
-        const line = document.querySelector(`.route-line[data-line="${k}"]`);
+        const step = document.querySelector('.step[data-step="' + k + '"]');
+        const line = document.querySelector('.route-line[data-line="' + k + '"]');
         if (!step || !line) return;
         const pick = step.querySelector('.step-pick span:first-child');
         if (state[k]) {
           step.classList.add('is-on'); step.classList.remove('is-empty');
-          step.querySelector('.step-state').textContent = (k === 'course' || k === 'voucher') ? 'Selected' : 'Added';
+          if (k === 'retake') { step.querySelector('.step-state').textContent = 'Guaranteed'; pick.textContent = '\u2713 Protected'; }
+          else if (k === 'labs') { step.querySelector('.step-state').textContent = 'Added'; pick.textContent = currentTrack === 'prince2' ? '\u2713 Materials added' : '\u2713 Labs added'; }
           line.classList.remove('is-pending');
           line.querySelector('.amt').textContent = fmt(PRICES[k]);
           const stepAmt = step.querySelector('.step-pick .amt');
           if (stepAmt) stepAmt.textContent = fmt(PRICES[k]);
-          if (k === 'retake') pick.textContent = '\u2713 Protected';
-          if (k === 'labs') pick.textContent = currentTrack === 'prince2' ? '\u2713 Materials added' : '\u2713 Labs added';
         } else {
           step.classList.remove('is-on'); step.classList.add('is-empty');
-          step.querySelector('.step-state').textContent = 'Optional';
+          if (k === 'retake') step.querySelector('.step-state').textContent = 'Add to guarantee';
+          else if (k === 'labs') step.querySelector('.step-state').textContent = 'Recommended';
           line.classList.add('is-pending');
           line.querySelector('.amt').textContent = '\u2014 \u2014';
           if (k === 'retake' || k === 'labs') pick.textContent = TRACKS[currentTrack].steps[k].pick;
@@ -1244,38 +1292,78 @@
 
       const go = document.querySelector('.route-go');
       if (go) { go.setAttribute('data-price', fmt(total)); go.setAttribute('data-price-value', String(total)); }
+      updateGuaranteedState();
+    }
+
+    function updateFmt(idx) {
+      currentFmt = idx;
+      const track = TRACKS[currentTrack];
+      PRICES.course = track.fmtAmts[idx];
+      // Update format chip labels and selected state
+      document.querySelectorAll('.fmt-chip').forEach((c, i) => {
+        c.classList.toggle('is-active', i === idx);
+        c.textContent = track.formats[i];
+      });
+      recompute();
     }
 
     function loadTrack(id) {
       if (!TRACKS[id]) return;
       currentTrack = id;
+      currentFmt = 0;
       state = { course: true, voucher: true, retake: false, labs: false };
       PRICES = {};
       const track = TRACKS[id];
+
+      // Update format chips
+      document.querySelectorAll('.fmt-chip').forEach((c, i) => {
+        c.classList.toggle('is-active', i === 0);
+        c.textContent = track.formats[i];
+      });
+
+      // Update step content
       ['course', 'voucher', 'retake', 'labs'].forEach(k => {
         const d = track.steps[k];
-        PRICES[k] = d.amt;
-        const step = document.querySelector(`.step[data-step="${k}"]`);
+        PRICES[k] = (k === 'course') ? track.fmtAmts[0] : d.amt;
+        const step = document.querySelector('.step[data-step="' + k + '"]');
         if (step) {
-          step.querySelector('.step-desc').textContent = d.desc;
+          const descEl = step.querySelector('.step-desc');
+          if (descEl && d.desc) descEl.textContent = d.desc;
           step.querySelector('.step-pick span:first-child').textContent = d.pick;
+          const statEl = step.querySelector('[data-step-stat]');
+          if (statEl) statEl.textContent = track.retakeStat;
+          const labsStatEl = step.querySelector('[data-step-labs-stat]');
+          if (labsStatEl) labsStatEl.textContent = track.labsStat;
         }
-        const line = document.querySelector(`.route-line[data-line="${k}"]`);
+        const line = document.querySelector('.route-line[data-line="' + k + '"]');
         if (line) line.querySelector('.name').textContent = d.line;
       });
+
       document.querySelectorAll('.track-chip').forEach(c => c.classList.toggle('is-active', c.dataset.track === id));
       recompute();
     }
 
+    // Step clicks
     document.querySelectorAll('.step').forEach(step => {
-      step.addEventListener('click', () => {
+      step.addEventListener('click', (e) => {
+        // Don't toggle if clicking a format chip
+        if (e.target.closest('.fmt-chip')) return;
         const k = step.dataset.step;
-        if (k === 'course') return;
+        if (k === 'course' || k === 'voucher') return;
         state[k] = !state[k];
         recompute();
       });
     });
 
+    // Format chips
+    document.querySelectorAll('.fmt-chip').forEach((chip, i) => {
+      chip.addEventListener('click', (e) => {
+        e.stopPropagation();
+        updateFmt(i);
+      });
+    });
+
+    // Track chips
     document.querySelectorAll('.track-chip').forEach(chip => {
       chip.addEventListener('click', () => loadTrack(chip.dataset.track));
     });

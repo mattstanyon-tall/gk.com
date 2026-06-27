@@ -823,9 +823,8 @@ html, body {
 .route-grid {
   display: grid;
   grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr);
-  gap: 24px;
   border: 1px solid rgba(255,255,255,0.2);
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
   overflow: hidden;
 }
 .route-steps {
@@ -833,8 +832,7 @@ html, body {
   grid-template-columns: repeat(4, 1fr);
   border-right: 1px solid rgba(255,255,255,0.2);
 }
-.step {
-  padding: 32px 24px 72px; /* bottom leaves room for abs. step-pick */
+.step-course { cursor: default; }\n.step {\n  padding: 28px 20px 72px;
   border-right: 1px solid rgba(255,255,255,0.14);
   display: flex;
   flex-direction: column;
@@ -920,13 +918,14 @@ html, body {
 
 /* ---------- Track selector ---------- */
 .route-track-bar {
-  grid-column: 1 / -1;
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 13px 24px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  background: rgba(255,255,255,0.03);
+  padding: 14px 24px;
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 8px 8px 0 0;
+  border-bottom: none;
+  background: rgba(255,255,255,0.04);
 }
 .route-track-label {
   font-family: var(--font-num);
@@ -935,6 +934,7 @@ html, body {
   text-transform: uppercase;
   color: rgba(255,255,255,0.4);
   flex-shrink: 0;
+  white-space: nowrap;
 }
 .route-track-chips {
   display: flex;
@@ -942,7 +942,7 @@ html, body {
   flex-wrap: wrap;
 }
 .track-chip {
-  padding: 4px 13px;
+  padding: 5px 14px;
   border-radius: 100px;
   border: 1px solid rgba(255,255,255,0.18);
   background: transparent;
@@ -964,6 +964,68 @@ html, body {
   color: #fff;
   font-weight: 600;
 }
+
+/* ---------- Format chips (Step 1) ---------- */
+.step-formats {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+.fmt-chip {
+  padding: 3px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: rgba(255,255,255,0.55);
+  font-size: 0.72rem;
+  font-family: var(--font-disp);
+  cursor: pointer;
+  transition: background 0.12s, color 0.12s, border-color 0.12s;
+}
+.fmt-chip:hover {
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  border-color: rgba(255,255,255,0.4);
+}
+.fmt-chip.is-active {
+  background: rgba(255,255,255,0.18);
+  border-color: rgba(255,255,255,0.5);
+  color: #fff;
+  font-weight: 600;
+}
+.step.is-on .fmt-chip { border-color: rgba(255,255,255,0.3); }
+.step.is-on .fmt-chip.is-active { background: rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.6); }
+
+/* ---------- Stat lines (Steps 3+4) ---------- */
+.step-stat {
+  font-size: 0.75rem;
+  font-style: italic;
+  color: rgba(255,255,255,0.45);
+  margin: -4px 0 4px;
+  line-height: 1.4;
+}
+.step.is-on .step-stat { color: rgba(255,255,255,0.6); }
+
+/* ---------- Guaranteed state ---------- */
+.route-guarantee {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-num);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--cobalt);
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.18);
+  border-radius: 100px;
+  padding: 5px 12px;
+  margin-bottom: 12px;
+  width: fit-content;
+}
+.route-guarantee[hidden] { display: none; }
+.route-summary.is-guaranteed .route-go { background: var(--cobalt); }
 
 .route-summary {
   padding: 32px 28px 32px;
