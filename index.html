@@ -45,11 +45,17 @@
 
   /* Nav on amber hero */
   .nav { background: #E07B00; border-bottom-color: rgba(26,15,0,0.15); }
-  .nav-logo, .nav-logo:visited { color: #1A0F00; }
-  .nav-link { color: #1A0F00; }
-  .nav-link:hover { background: rgba(26,15,0,0.08); }
-  .nav .btn { background: #1A0F00; color: #E07B00; border-radius: 8px; }
-  .nav .btn:hover { background: #3D1F00; color: #FFB347; }
+  .nav-logo, .nav-logo:visited { color: #fff; }
+  .nav-logo .logo-mark::before { border-color: #E07B00; }
+  .nav-logo .logo-mark::after  { background: #E07B00; }
+  .nav-link { color: #fff; }
+  .nav-link:hover { background: rgba(255,255,255,0.14); color: #fff; }
+  .lang-switch { color: #fff; }
+  .lang-switch:hover { background: rgba(255,255,255,0.14); }
+  .nav-icon-btn { color: #fff; }
+  .nav-icon-btn:hover { background: rgba(255,255,255,0.14); }
+  .nav .btn { background: #fff; color: #1A0F00; border-radius: 8px; }
+  .nav .btn:hover { background: rgba(255,255,255,0.88); color: #1A0F00; }
 
   /* Booker tabs — white text unselected, pure white card when active */
   .booker-tab { background: rgba(0,0,0,0.18); color: rgba(255,255,255,0.75); }
