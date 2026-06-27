@@ -850,7 +850,8 @@ html, body {
 .step.is-on:hover { background: var(--cobalt-700); }
 .step.is-on .step-state { color: rgba(255,255,255,0.8); }
 .step.is-on .step-no { color: rgba(255,255,255,0.65); }
-.step.is-on .step-pick { border-top-color: rgba(255,255,255,0.25); }
+.step.is-on .step-pick { border-top-color: rgba(255,255,255,0.25); color: #fff; }
+.step.is-on .step-pick .amt { color: rgba(255,255,255,0.85); }
 
 .step-no {
   font-family: var(--font-num);
