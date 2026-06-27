@@ -237,9 +237,14 @@ html, body {
 .booker-body > :last-child { border-radius: 0 8px 8px 0; }
 .booker-body[hidden] { display: none; }
 .booker-body-prog {
-  /* 3-field consult variant */
-  grid-template-columns: 1.4fr 1.4fr 1.4fr auto;
+  /* 3-field consult variant — same column template as 4-field panels to prevent jump */
+  grid-template-columns: 1.4fr 1.4fr 1.4fr 1fr auto;
 }
+.booker-body-prog .booker-field:nth-child(3) {
+  grid-column: span 2;
+  border-right: 0;
+}
+.booker-body-prog .booker-go { border-left: 1px solid var(--ink-line); }
 .booker-field {
   border-right: 1px solid var(--ink-line);
   padding: 18px 22px 16px;
@@ -432,7 +437,8 @@ html, body {
   color: #fff;
   border: 0;
   border-radius: 0 8px 8px 0;
-  padding: 0 36px;
+  padding: 0 28px;
+  min-width: 160px;
   font-family: var(--font-disp);
   font-weight: 700;
   font-size: 1rem;
