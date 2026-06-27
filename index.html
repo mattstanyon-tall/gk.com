@@ -758,7 +758,7 @@
         </button>
 
         <button class="step" data-step="retake" type="button">
-          <div class="step-no"><span>STEP 03</span><span class="step-state">Add to guarantee</span></div>
+          <div class="step-no"><span>STEP 03</span><span class="step-state">Optional</span></div>
           <h3 class="step-name">Retake Protection</h3>
           <p class="step-desc">Free second sitting if you don't pass first time.</p>
           <p class="step-stat" data-step-stat>1 in 3 CISSP candidates need a resit.</p>
@@ -782,7 +782,7 @@
 
       <aside class="route-summary">
         <h3>Your route</h3>
-        <div class="route-guarantee" data-route-guarantee hidden>
+        <div class="route-guarantee is-hidden" data-route-guarantee>
           <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor"><path d="M6 0l1.5 4.5H12L8.25 7.3l1.5 4.5L6 9l-3.75 2.8 1.5-4.5L0 4.5h4.5z"/></svg>
           Guaranteed route
         </div>
@@ -1253,10 +1253,10 @@
       const badge = document.querySelector('[data-route-guarantee]');
       const goLabel = document.querySelector('[data-go-label]');
       const summary = document.querySelector('.route-summary');
-      if (badge) badge.hidden = !guaranteed;
+      if (badge) badge.classList.toggle('is-hidden', !guaranteed);
       if (goLabel) {
-        if (full) goLabel.textContent = 'Add full route to cart';
-        else if (guaranteed) goLabel.textContent = 'Add guaranteed route to cart';
+        if (full) goLabel.textContent = 'Complete route to cart';
+        else if (guaranteed) goLabel.textContent = 'Add guaranteed route';
         else goLabel.textContent = 'Add route to cart';
       }
       if (summary) summary.classList.toggle('is-guaranteed', guaranteed);
@@ -1276,14 +1276,16 @@
           step.classList.add('is-on'); step.classList.remove('is-empty');
           if (k === 'retake') { step.querySelector('.step-state').textContent = 'Guaranteed'; pick.textContent = '\u2713 Protected'; }
           else if (k === 'labs') { step.querySelector('.step-state').textContent = 'Added'; pick.textContent = currentTrack === 'prince2' ? '\u2713 Materials added' : '\u2713 Labs added'; }
+          else if (k === 'voucher') { step.querySelector('.step-state').textContent = 'Included'; }
           line.classList.remove('is-pending');
           line.querySelector('.amt').textContent = fmt(PRICES[k]);
           const stepAmt = step.querySelector('.step-pick .amt');
           if (stepAmt) stepAmt.textContent = fmt(PRICES[k]);
         } else {
           step.classList.remove('is-on'); step.classList.add('is-empty');
-          if (k === 'retake') step.querySelector('.step-state').textContent = 'Add to guarantee';
-          else if (k === 'labs') step.querySelector('.step-state').textContent = 'Recommended';
+          if (k === 'retake') step.querySelector('.step-state').textContent = 'Optional';
+          else if (k === 'labs') step.querySelector('.step-state').textContent = 'Optional';
+          else if (k === 'voucher') step.querySelector('.step-state').textContent = 'Add voucher';
           line.classList.add('is-pending');
           line.querySelector('.amt').textContent = '\u2014 \u2014';
           if (k === 'retake' || k === 'labs') pick.textContent = TRACKS[currentTrack].steps[k].pick;
@@ -1349,7 +1351,7 @@
         // Don't toggle if clicking a format chip
         if (e.target.closest('.fmt-chip')) return;
         const k = step.dataset.step;
-        if (k === 'course' || k === 'voucher') return;
+        if (k === 'course') return;
         state[k] = !state[k];
         recompute();
       });

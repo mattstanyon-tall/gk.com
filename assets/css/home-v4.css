@@ -1029,7 +1029,7 @@ html, body {
   margin-bottom: 12px;
   width: fit-content;
 }
-.route-guarantee[hidden] { display: none; }
+.route-guarantee.is-hidden { visibility: hidden; }
 .route-summary.is-guaranteed .route-go { background: var(--cobalt); }
 
 .route-summary {
@@ -1097,6 +1097,7 @@ html, body {
   border: 0;
   border-radius: 8px;
   padding: 14px 18px;
+  white-space: nowrap;
   font-family: var(--font-disp);
   font-weight: 700;
   font-size: 0.9375rem;
