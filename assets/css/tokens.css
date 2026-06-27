@@ -1,0 +1,146 @@
+/* =========================================================================
+   GLOBAL KNOWLEDGE — DESIGN TOKENS
+   Direction: Engineered Clarity, with human warmth.
+   Every visual decision should answer to one of these tokens.
+   ========================================================================= */
+
+:root {
+  /* ---- Color: foundation ---- */
+  --ink-900: #0A0E1A;   /* near-black navy — primary text, primary surface */
+  --ink-800: #131826;
+  --ink-700: #1C2436;
+  --ink-600: #2A3349;
+  --ink-500: #4A546B;
+  --ink-400: #6B7388;
+  --ink-300: #9098A8;
+  --ink-200: #C5CAD4;
+  --ink-100: #E4E6EB;
+
+  --paper-50:  #FBFAF6;  /* warm off-white — primary light surface */
+  --paper-100: #F4F1EA;  /* sand */
+  --paper-200: #EBE6DB;  /* parchment */
+  --paper-300: #DDD5C4;
+
+  /* ---- Color: signal ---- */
+  --build-500: #00C896;  /* electric build-green — primary signal/CTA */
+  --build-400: #2BE0AE;
+  --build-600: #00A77E;
+  --build-700: #007A5C;
+  --build-50:  #E6FAF3;
+
+  --ember-500: #FF6A3D;  /* warm human accent — used sparingly */
+  --ember-400: #FF8B66;
+  --ember-50:  #FFEEE6;
+
+  --amber-500: #F5B400;  /* gold/award accent */
+
+  /* ---- Semantic ---- */
+  --bg:               var(--paper-50);
+  --bg-elev:          #FFFFFF;
+  --bg-inverse:       var(--ink-900);
+  --bg-muted:         var(--paper-100);
+  --surface-border:   rgba(10, 14, 26, 0.08);
+  --surface-border-strong: rgba(10, 14, 26, 0.16);
+
+  --fg:               var(--ink-900);
+  --fg-muted:         var(--ink-500);
+  --fg-subtle:        var(--ink-400);
+  --fg-inverse:       var(--paper-50);
+
+  --accent:           var(--build-500);
+  --accent-fg:        var(--ink-900);
+
+  /* ---- Type: families ---- */
+  --font-display: "Söhne", "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-body:    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif:   "Source Serif 4", "Source Serif Pro", "Iowan Old Style", Georgia, serif;
+  --font-mono:    "JetBrains Mono", "SF Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* ---- Type: scale (modular, 1.25) ---- */
+  --fs-xs:   0.75rem;   /* 12 */
+  --fs-sm:   0.875rem;  /* 14 */
+  --fs-base: 1rem;      /* 16 */
+  --fs-md:   1.125rem;  /* 18 */
+  --fs-lg:   1.375rem;  /* 22 */
+  --fs-xl:   1.75rem;   /* 28 */
+  --fs-2xl:  2.25rem;   /* 36 */
+  --fs-3xl:  3rem;      /* 48 */
+  --fs-4xl:  4rem;      /* 64 */
+  --fs-5xl:  5.5rem;    /* 88 */
+  --fs-6xl:  7.5rem;    /* 120 */
+
+  /* ---- Type: weights ---- */
+  --fw-regular: 400;
+  --fw-medium:  500;
+  --fw-semibold: 600;
+  --fw-bold: 700;
+
+  /* ---- Spacing ---- */
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+  --s-9: 96px;
+  --s-10: 128px;
+  --s-11: 192px;
+
+  /* ---- Layout ---- */
+  --container-max: 1360px;
+  --container-pad: clamp(20px, 4vw, 56px);
+  --gutter: 24px;
+  --col-gap: 32px;
+
+  /* ---- Radius ---- */
+  --r-1: 4px;
+  --r-2: 8px;
+  --r-3: 12px;
+  --r-4: 20px;
+  --r-pill: 999px;
+
+  /* ---- Shadows ---- */
+  --shadow-1: 0 1px 2px rgba(10,14,26,0.04), 0 1px 1px rgba(10,14,26,0.04);
+  --shadow-2: 0 4px 12px rgba(10,14,26,0.06), 0 2px 4px rgba(10,14,26,0.04);
+  --shadow-3: 0 12px 32px rgba(10,14,26,0.10), 0 4px 8px rgba(10,14,26,0.04);
+  --shadow-4: 0 32px 64px rgba(10,14,26,0.14), 0 8px 16px rgba(10,14,26,0.06);
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-inout: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-1: 120ms;
+  --dur-2: 220ms;
+  --dur-3: 360ms;
+  --dur-4: 600ms;
+  --dur-5: 900ms;
+
+  /* ---- Z ---- */
+  --z-nav: 50;
+  --z-mega: 60;
+  --z-drawer: 70;
+  --z-modal: 80;
+  --z-toast: 90;
+}
+
+/* Dark surface helper (for inverse sections) */
+.surface-ink {
+  --bg: var(--ink-900);
+  --bg-elev: var(--ink-800);
+  --bg-muted: var(--ink-800);
+  --fg: var(--paper-50);
+  --fg-muted: var(--ink-200);
+  --fg-subtle: var(--ink-300);
+  --surface-border: rgba(255,255,255,0.10);
+  --surface-border-strong: rgba(255,255,255,0.20);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
